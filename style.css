@@ -1,0 +1,27 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.container-fluid {
+  padding-top: 50px;
+}
+
+.card {
+  transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-header h5 {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 4px;
+}
