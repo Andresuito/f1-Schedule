@@ -30,6 +30,11 @@ const getRaceTime = (raceId) => {
     });
 };
 
+const isRaceWeekend = (startDate, endDate) => {
+  const now = new Date();
+  return now >= startDate && now <= endDate;
+};
+
 fetch(apiUrl)
   .then((response) => response.json())
   .then((data) => {
@@ -56,7 +61,7 @@ fetch(apiUrl)
           <p class="m-0">${race.Circuit.Location.locality}, ${
         race.Circuit.Location.country
       }</p>
-          <h5 class="m-0 bg-dark text-white d-flex align-items-center justify-content-center f1-date-header">${startDate
+          <h5 class="m-0 bg-dark text-white d-flex align-items-center justify-content-center f1-date-header"><i class="fas fa-calendar-alt me-2"></i>${startDate
             .toLocaleDateString("en-US", {
               month: "short",
               day: "numeric",
@@ -74,7 +79,7 @@ fetch(apiUrl)
       <div class="card-body f1-card-body">
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <strong>Free Practice 1:</strong> ${
+            <i class="fas fa-stopwatch me-2"></i><strong>Free Practice 1:</strong> ${
               race.FirstPractice
                 ? getLocalTime(
                     race.FirstPractice.date + "T" + race.FirstPractice.time
@@ -83,7 +88,7 @@ fetch(apiUrl)
             }
           </li>
           <li class="list-group-item">
-            <strong>Free Practice 2:</strong> ${
+            <i class="fas fa-stopwatch me-2"></i><strong>Free Practice 2:</strong> ${
               race.SecondPractice
                 ? getLocalTime(
                     race.SecondPractice.date + "T" + race.SecondPractice.time
@@ -92,7 +97,7 @@ fetch(apiUrl)
             }
           </li>
           <li class="list-group-item">
-            <strong>Free Practice 3:</strong> ${
+            <i class="fas fa-stopwatch me-2"></i><strong>Free Practice 3:</strong> ${
               race.ThirdPractice
                 ? getLocalTime(
                     race.ThirdPractice.date + "T" + race.ThirdPractice.time
@@ -100,17 +105,8 @@ fetch(apiUrl)
                 : "TBA"
             }
           </li>
-          <li class="list-group-item">
-            <strong>Qualifying:</strong> ${
-              race.Qualifying
-                ? getLocalTime(
-                    race.Qualifying.date + "T" + race.Qualifying.time
-                  )
-                : "TBA"
-            }
-              </li>
               <li class="list-group-item">
-                <strong>Race:</strong> ${
+              <i class="fa-solid fa-flag-checkered me-2"></i><strong>Race:</strong> ${
                   race.date ? getLocalTime(race.date + "T" + race.time) : "TBA"
                 }
               </li>
