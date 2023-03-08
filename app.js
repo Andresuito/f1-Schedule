@@ -105,6 +105,15 @@ fetch(apiUrl)
                 : "TBA"
             }
           </li>
+          <li class="list-group-item">
+            <i class="fas fa-stopwatch me-2"></i><strong>Qualifying:</strong> ${
+              race.ThirdPractice
+                ? getLocalTime(
+                    race.Qualifying.date + "T" + race.Qualifying.time
+                  )
+                : "TBA"
+            }
+          </li>
               <li class="list-group-item">
               <i class="fa-solid fa-flag-checkered me-2"></i><strong>Race:</strong> ${
                   race.date ? getLocalTime(race.date + "T" + race.time) : "TBA"
