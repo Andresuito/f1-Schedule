@@ -1,5 +1,20 @@
+@font-face {
+  font-family: "Formula1-Display-Bold-Bold";
+  src: url("./assets/Font-F1/Formula1-Display-Bold-Bold.ttf.woff")
+      format("woff"),
+    url("./assets/Font-F1/Formula1-Display-Bold-Bold.ttf.svg#Formula1-Display-Bold-Bold")
+      format("svg"),
+    url("./assets/Font-F1/Formula1-Display-Bold-Bold.ttf.eot"),
+    url("./assets/Font-F1/Formula1-Display-Bold-Bold.ttf.eot?#iefix")
+      format("embedded-opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Style */
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Formula1-Display-Bold-Bold" !important;
 }
 
 h1 {
@@ -25,4 +40,3 @@ h1 {
   padding: 5px;
   border-radius: 4px;
 }
-
