@@ -13,22 +13,6 @@ const getLocalTime = (utcDateStr) => {
   return localTime.toLocaleString("es-ES", options);
 };
 
-const getRaceTime = async (raceId) => {
-  const raceUrl = `https://ergast.com/api/f1/2023/${raceId}.json`;
-
-  try {
-    const response = await fetch(raceUrl);
-    const data = await response.json();
-    const raceTimeStr =
-      data.MRData.RaceTable.Races[0].date +
-      "T" +
-      data.MRData.RaceTable.Races[0].time;
-    return getLocalTime(raceTimeStr);
-  } catch (error) {
-    console.error("Error al obtener la hora de la carrera:", error);
-  }
-};
-
 const isRaceWeekend = (startDate, endDate) => {
   const now = new Date();
   return now >= startDate && now <= endDate;
@@ -40,6 +24,23 @@ const sortRaces = (races) => {
     const bDate = new Date(b.date);
     return aDate - bDate;
   });
+};
+
+const getRaceTime = (raceId) => {
+  const raceUrl = `https://ergast.com/api/f1/2023/${raceId}.json`;
+
+  return fetch(raceUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      const raceTimeStr =
+        data.MRData.RaceTable.Races[0].date +
+        "T" +
+        data.MRData.RaceTable.Races[0].time;
+      return getLocalTime(raceTimeStr);
+    })
+    .catch((error) => {
+      console.error("Error al obtener la hora de la carrera:", error);
+    });
 };
 
 fetch(apiUrl)
@@ -133,8 +134,12 @@ fetch(apiUrl)
               </li>
               <li class="list-group-item bg-lighter-gray text-black">
                 <i class="fas fa-flag-checkered me-2"></i><strong>Race - </strong>
-                ${race.raceTime ? await getLocalTime(race.raceTime) : "TBA"}
-              </li>
+                ${
+                  race.date
+                    ? await getLocalTime(race.date + "T" + race.time)
+                    : "TBA"
+                }              
+                </li>
             </ul>
           </div>
         </div>
